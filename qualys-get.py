@@ -10,12 +10,12 @@ result		= []
 
 # check if the credential file ".qcrc" is in the cwd, else create it
 def connect_api():
-	print os.getcwd()+'/.qcrc'
 	if not os.path.isfile(os.getcwd()+'/.qcrc'):
 
 		# create the qcrc, enter your qualys credentials
 		print 'creating .qcrc in '+folder+', enter your qualysguard credentials below;'
 		qgs	= qualysapi.connect(remember_me=True)
+
 	else:
 		# connect using existing .qcrc
 		qgs	= qualysapi.connect()
@@ -34,6 +34,7 @@ def connect_api():
 
 		a	= x['ID']+','+y1+','+y2+','+z1+','+z2+','+x['USER_LOGIN']+','+x['OUTPUT_FORMAT']+','+x['SIZE']
 		print a
+
 		result.append(str(a)+'\n')
 		resid.append(int(x['ID']))
 
@@ -43,8 +44,6 @@ def connect_api():
 	for x in resid:
 		fname	= str(x)+'_'+str(y2)+'.csv'
 
-		print 'checking '+str(folder)+str(fname)
-
 		if not os.path.isfile(folder+fname):
 			print 'downloading '+fname
 			download_report(x, fname)
@@ -52,7 +51,7 @@ def connect_api():
 			print 'skipping '+fname
 	
 	# write an overview of report metadata to a csv
-	f	= open(folder+'reports.csv', 'wb')
+	f	= open(os.getcwd()+'/reports.csv', 'wb')
 	for x in result:
 		f.write(x+'\n')
 	f.close
