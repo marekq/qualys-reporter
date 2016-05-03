@@ -16,13 +16,11 @@ Installation
 
 You need the following Python libraries which you can retrieve using 'python-pip' or your OS repository.;
 
-	$ pip install datetime 
-	$ pip install qualysapi
-	$ pip install xmltodict
+	$ pip install datetime qualysapi xmltodict
 
 I've tested the script on Debian and OS X, but I expect other OS should work too. If you face difficulties, please let me know!
 
-Once you run the script, it will check whether a '.qcrc' file exists in your current directory. This file contains your QualysGuard credentials in clear text (!!!), so ensure to keep it secure using file permissions or disable the "remember_me=True" option in the code, which disables credential storage all together. 
+Once you run the script, it will check whether a '.qcrc' file exists in your current directory. This file contains your QualysGuard credentials in clear text (!!!), so ensure to keep it secure using file read permissions. 
 
 Usage
 -----
