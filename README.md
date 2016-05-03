@@ -33,8 +33,9 @@ Next, simply run the command below to store any new CSV's in the /results folder
 
 	$ python qualys-get.py
 
-I've added the command to a cronjob so that new reports are automatically retrieved once they become available.  
+I've added the command to a cronjob so that new reports are automatically retrieved once they become available.  From what I can tell, its possible to schedule report delivery only once a day, but the script will skip downloading any old reports it already has on disk so feel free to check multiple times per day. 
 
+If your server needs to connect to the Internet using an (un)authenticated webproxy, you can manually add proxy details to the .qcrc file - an example configuration can be found [here](https://github.com/paragbaxi/qualysapi#example-config-file). 
 
 Contact
 -------
