@@ -2,11 +2,12 @@
 # @marekq
 # www.marek.rocks
 
-import qualysapi, xmltodict, datetime, time, os.path
+import qualysapi, xmltodict, datetime, time, os.path, glob, re
 
 folder		= os.getcwd()+'/results/'
 resid		= []
 result		= []
+
 
 # check if the credential file ".qcrc" is in the cwd, else create it
 def connect_api():
@@ -41,10 +42,18 @@ def connect_api():
 	print ''
 
 	# check for reports that arent downloaded yet, else skip
+	tmp	= []
+	tmp.append(glob.glob(os.getcwd()+'/results/*csv'))
+
 	for x in resid:
+		found	= False
+		for y in tmp:
+			if re.search(str(x), str(y)):
+				found	= True
+
 		fname	= str(x)+'_'+str(y2)+'.csv'
 
-		if not os.path.isfile(folder+fname):
+		if found == False:
 			print 'downloading '+fname
 			download_report(x, fname)
 		else:
@@ -53,8 +62,9 @@ def connect_api():
 	# write an overview of report metadata to a csv
 	f	= open(os.getcwd()+'/reports.csv', 'wb')
 	for x in result:
-		f.write(x+'\n')
+		f.write(x)
 	f.close
+
 
 # download reports based on their ID value
 def download_report(rid, fname):
